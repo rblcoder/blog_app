@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

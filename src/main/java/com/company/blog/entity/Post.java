@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "tag_id")
+    @NonNull
     private Tag tag;
 
 }
