@@ -17,4 +17,7 @@ Configuring swagger
 https://springdoc.org/
 
 Spring Data REST
+
+https://spring.io/projects/spring-data-rest
+
 https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.boot
