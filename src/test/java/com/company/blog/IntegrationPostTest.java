@@ -1,59 +1,42 @@
 package com.company.blog;
 
-import com.company.blog.entity.Post;
-import com.company.blog.entity.Tag;
-import org.junit.jupiter.api.Assertions;
+import com.company.blog.repository.PostRepository;
+import com.company.blog.repository.TagRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class IntegrationPostTest {
 
-    @LocalServerPort
-    int randomServerPort;
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
 
-    @DirtiesContext
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+
     @Test
-    public void testAddBlogSuccess() throws URISyntaxException {
-        final String baseUrlTag = "http://localhost:" + randomServerPort + "/api/tags";
-        URI uriTag = new URI(baseUrlTag);
-        Tag tag = new Tag(null, "Java");
+    public void testAddPost() throws Exception {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("X-COM-PERSIST", "true");
+        mockMvc.perform(get("/api/posts"))
 
-        HttpEntity<Tag> requestTag = new HttpEntity<>(tag, headers);
-
-        ResponseEntity<String> resultTag = this.restTemplate.postForEntity(uriTag, requestTag, String.class);
-
-        final String baseUrlPost = "http://localhost:" + randomServerPort + "/api/posts";
-
-        tag.setId(1L);
-
-        URI uriPost = new URI(baseUrlPost);
-
-        Post post = new Post(null, "Blog Title", "Blog Text",
-                tag);
-
-        HttpEntity<Post> requestPost = new HttpEntity<>(post, headers);
-
-        ResponseEntity<String> resultPost = this.restTemplate.postForEntity(uriPost, requestPost, String.class);
-
-        Assertions.assertEquals(201, resultPost.getStatusCodeValue());
-
-        Assertions.assertTrue(resultPost.getBody().contains("http://localhost:" + randomServerPort + "/api/posts/" + 1));
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
 
     }
 }

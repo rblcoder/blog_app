@@ -1,47 +1,60 @@
 package com.company.blog;
 
 import com.company.blog.entity.Tag;
-import org.junit.jupiter.api.Assertions;
+import com.company.blog.repository.PostRepository;
+import com.company.blog.repository.TagRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@WebMvcTest
+//@AutoConfigureMockMvc(addFilters = false)
+//@ComponentScan(basePackages = "com.company.blog")
+@SpringBootTest
+@AutoConfigureMockMvc
 public class IntegrationTagTest {
 
-    @LocalServerPort
-    int randomServerPort;
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Test
     @DirtiesContext
-    public void testAddTagSuccess() throws URISyntaxException {
-        final String baseUrl = "http://localhost:" + randomServerPort + "/api/tags";
-        URI uri = new URI(baseUrl);
-        Tag tag = new Tag(null, "Spring");
+    public void testAddTag() throws Exception {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("X-COM-PERSIST", "true");
+        MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
 
-        HttpEntity<Tag> request = new HttpEntity<>(tag, headers);
+        multiValueMap.add("name", "Spring Boot");
 
-        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+        Tag tag = new Tag(null, "Spring Boot");
 
+        mockMvc.perform(post("/api/tags")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(tag)))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
 
-        Assertions.assertEquals(201, result.getStatusCodeValue());
-
-        Assertions.assertTrue(result.getBody().contains("http://localhost:" + randomServerPort + "/api/tags/" + 1));
     }
 
 

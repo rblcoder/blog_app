@@ -1,9 +1,12 @@
 package com.company.blog.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.persistence.*;
 
+@RepositoryRestResource
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,6 +29,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "tag_id")
     @NonNull
+    @JsonProperty("tag")
     private Tag tag;
 
 }
