@@ -4,6 +4,9 @@ Blog App back-end built using Spring boot
 # To access swagger ui
 Use http://localhost:8080/api/swagger-ui.html
 
+# To view status using actuator
+http://localhost:8080/actuator/health
+
 # Rest API
 Spring Data REST is used here to expost Rest API services
 
