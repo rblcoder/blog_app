@@ -1,5 +1,6 @@
 package com.company.blog;
 
+import com.company.blog.repository.AuthorRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,14 +28,16 @@ public class IntegrationPostTest {
     private TagRepository tagRepository;
 
     @Autowired
+    private AuthorRepository authorRepository;
+
+    @Autowired
     private ObjectMapper objectMapper;
 
 
     @Test
-    public void testAddPost() throws Exception {
+    public void testViewPosts() throws Exception {
 
         mockMvc.perform(get("/api/posts"))
-
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print());
 

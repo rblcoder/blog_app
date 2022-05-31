@@ -11,7 +11,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Tag {
     @Id

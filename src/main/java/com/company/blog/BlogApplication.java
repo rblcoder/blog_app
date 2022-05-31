@@ -1,7 +1,9 @@
 package com.company.blog;
 
+import com.company.blog.entity.Author;
 import com.company.blog.entity.Post;
 import com.company.blog.entity.Tag;
+import com.company.blog.repository.AuthorRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class BlogApplication {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    AuthorRepository authorRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);
     }
@@ -34,8 +39,14 @@ public class BlogApplication {
         tagRepository.save(javaTag);
         tagRepository.save(new Tag("Database"));
 
-        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", htmlTag));
-        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaTag));
+        Author authorJack = new Author("Jack", "jack@rmail.com", "jack123");
+        Author authorPramita = new Author("Pramita", "pramita@rmail.com", "pramita123");
+        authorRepository.save(authorJack);
+        authorRepository.save(authorPramita);
+
+
+        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", htmlTag, authorJack));
+        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaTag, authorPramita));
 
 
     }

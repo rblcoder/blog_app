@@ -12,7 +12,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @RequiredArgsConstructor
 public class Post {
     @Id
@@ -31,5 +30,11 @@ public class Post {
     @NonNull
     @JsonProperty("tag")
     private Tag tag;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    @NonNull
+    @JsonProperty("author")
+    private Author author;
 
 }
