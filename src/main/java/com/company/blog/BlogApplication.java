@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
+import java.util.HashSet;
 
 
 @SpringBootApplication
@@ -35,18 +36,24 @@ public class BlogApplication {
 
         Tag javaTag = new Tag("Java");
         Tag htmlTag = new Tag("Html");
+        Tag springbootTag = new Tag("Spring boot");
         tagRepository.save(htmlTag);
         tagRepository.save(javaTag);
         tagRepository.save(new Tag("Database"));
+        tagRepository.save(springbootTag);
 
         Author authorJack = new Author("Jack", "jack@rmail.com", "jack123");
         Author authorPramita = new Author("Pramita", "pramita@rmail.com", "pramita123");
         authorRepository.save(authorJack);
         authorRepository.save(authorPramita);
 
-
-        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", htmlTag, authorJack));
-        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaTag, authorPramita));
+        HashSet<Tag> javaRelatedTags = new HashSet<>();
+        javaRelatedTags.add(javaTag);
+        javaRelatedTags.add(springbootTag);
+        HashSet<Tag> frontEndTags = new HashSet<>();
+        frontEndTags.add(htmlTag);
+        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", frontEndTags, authorJack));
+        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaRelatedTags, authorPramita));
 
 
     }

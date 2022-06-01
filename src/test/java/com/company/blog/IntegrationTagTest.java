@@ -37,7 +37,7 @@ public class IntegrationTagTest {
     @DirtiesContext
     public void testAddTag() throws Exception {
 
-        Tag tag = new Tag(null, "Spring Boot");
+        Tag tag = new Tag(null, "React");
 
         mockMvc.perform(post("/api/tags")
                         .contentType(MediaType.APPLICATION_JSON)

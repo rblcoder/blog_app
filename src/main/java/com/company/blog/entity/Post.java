@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @RepositoryRestResource
 @Entity
@@ -25,11 +26,12 @@ public class Post {
     @NonNull
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "tag_id")
+    @ManyToMany
+    @JoinTable(name = "post_tags", joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     @NonNull
     @JsonProperty("tag")
-    private Tag tag;
+    private Set<Tag> tags;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
