@@ -1,9 +1,11 @@
 package com.company.blog.entity;
 
-import lombok.*;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 
 
 @Getter

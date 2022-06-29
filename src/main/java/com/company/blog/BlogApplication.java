@@ -7,7 +7,6 @@ import com.company.blog.entity.Tag;
 import com.company.blog.repository.AuthorRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
-import org.apache.tomcat.jni.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
