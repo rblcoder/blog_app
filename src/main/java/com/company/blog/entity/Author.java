@@ -2,6 +2,7 @@ package com.company.blog.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.apache.tomcat.jni.Address;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.persistence.*;
@@ -23,6 +24,9 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Embedded
+    private Location location;
 
     @NotEmpty(message = "Author name must not be empty")
     @Pattern(regexp = "^[A-Za-z0-9]+$")
