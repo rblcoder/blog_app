@@ -1,6 +1,6 @@
 package com.company.blog;
 
-import com.company.blog.repository.AuthorRepository;
+import com.company.blog.repository.OnlineUserRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +28,7 @@ public class IntegrationPostTest {
     private TagRepository tagRepository;
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private OnlineUserRepository onlineUserRepository;
 
     @Autowired
     private ObjectMapper objectMapper;

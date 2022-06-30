@@ -17,8 +17,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Table(name = "author")
-public class Author {
+@Table(name = "online_user")
+public class OnlineUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,7 +27,7 @@ public class Author {
     @Embedded
     private Location location;
 
-    @NotEmpty(message = "Author name must not be empty")
+    @NotEmpty(message = "User name must not be empty")
     @Pattern(regexp = "^[A-Za-z0-9]+$")
     @Size(min = 4, max = 15)
     @NonNull

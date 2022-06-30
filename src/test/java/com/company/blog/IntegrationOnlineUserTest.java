@@ -1,6 +1,6 @@
 package com.company.blog;
 
-import com.company.blog.repository.AuthorRepository;
+import com.company.blog.repository.OnlineUserRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class IntegrationAuthorTest {
+public class IntegrationOnlineUserTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -29,13 +29,13 @@ public class IntegrationAuthorTest {
     private TagRepository tagRepository;
 
     @Autowired
-    private AuthorRepository authorRepository;
+    private OnlineUserRepository onlineUserRepository;
 
 
     @Test
-    public void testGetAuthors() throws Exception {
+    public void testGetUsers() throws Exception {
 
-        mockMvc.perform(get("/api/authors"))
+        mockMvc.perform(get("/api/users"))
 
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print());
@@ -44,8 +44,8 @@ public class IntegrationAuthorTest {
 
     @Test
     @DirtiesContext
-    public void testCreateAuthor() throws Exception {
-        mockMvc.perform(post("/api/authors")
+    public void testCreateUser() throws Exception {
+        mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\" : \"Prachi\"," +
                                 " \"emailId\": \"prachi@email.com\"," +

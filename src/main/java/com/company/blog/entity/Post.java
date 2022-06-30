@@ -37,6 +37,6 @@ public class Post {
     @JoinColumn(name = "author_id")
     @NonNull
     @JsonProperty("author")
-    private Author author;
+    private OnlineUser onlineUser;
 
 }

@@ -1,10 +1,10 @@
 package com.company.blog;
 
-import com.company.blog.entity.Author;
+import com.company.blog.entity.OnlineUser;
 import com.company.blog.entity.Location;
 import com.company.blog.entity.Post;
 import com.company.blog.entity.Tag;
-import com.company.blog.repository.AuthorRepository;
+import com.company.blog.repository.OnlineUserRepository;
 import com.company.blog.repository.PostRepository;
 import com.company.blog.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class BlogApplication {
     PostRepository postRepository;
 
     @Autowired
-    AuthorRepository authorRepository;
+    OnlineUserRepository onlineUserRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class, args);
@@ -44,19 +44,19 @@ public class BlogApplication {
         tagRepository.save(springbootTag);
 
         Location location = new Location("Bengaluru", "Karnataka", "India");
-        Author authorJack = new Author("Jack", "jack@rmail.com", "jack123");
-        authorJack.setLocation(location);
-        Author authorPramita = new Author("Pramita", "pramita@rmail.com", "pramita123");
-        authorRepository.save(authorJack);
-        authorRepository.save(authorPramita);
+        OnlineUser onlineUserJack = new OnlineUser("Jack", "jack@rmail.com", "jack123");
+        onlineUserJack.setLocation(location);
+        OnlineUser onlineUserPramita = new OnlineUser("Pramita", "pramita@rmail.com", "pramita123");
+        onlineUserRepository.save(onlineUserJack);
+        onlineUserRepository.save(onlineUserPramita);
 
         HashSet<Tag> javaRelatedTags = new HashSet<>();
         javaRelatedTags.add(javaTag);
         javaRelatedTags.add(springbootTag);
         HashSet<Tag> frontEndTags = new HashSet<>();
         frontEndTags.add(htmlTag);
-        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", frontEndTags, authorJack));
-        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaRelatedTags, authorPramita));
+        postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", frontEndTags, onlineUserJack));
+        postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaRelatedTags, onlineUserPramita));
 
 
     }
