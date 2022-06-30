@@ -42,4 +42,14 @@ public class IntegrationPostTest {
                 .andDo(print());
 
     }
+
+    @Test
+    public void testViewPostsByAuthorName() throws Exception {
+
+        mockMvc.perform(get("/api/posts/search/findAllPostsByOnlineUserName")
+                        .param("name", "Jack"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
 }
