@@ -15,4 +15,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query(value = "select p.* from post p inner join online_user u on p.author_id = u.id and u.name=:name",
             nativeQuery = true)
     List<Post> findAllPostsByOnlineUserName(@Param("name") String name);
+
+    List<Post> findByTitle(String title);
 }
