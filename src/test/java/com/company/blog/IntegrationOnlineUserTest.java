@@ -43,6 +43,16 @@ public class IntegrationOnlineUserTest {
     }
 
     @Test
+    public void testOnlineUserfindByLocationCountry() throws Exception {
+
+        mockMvc.perform(get("/api/users/search/findByLocationCountry")
+                        .param("country", "India"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
+
+    @Test
     @DirtiesContext
     public void testCreateUser() throws Exception {
         mockMvc.perform(post("/api/users")
