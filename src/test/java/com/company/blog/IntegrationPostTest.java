@@ -54,6 +54,16 @@ public class IntegrationPostTest {
     }
 
     @Test
+    public void testViewPostsByTitle() throws Exception {
+
+        mockMvc.perform(get("/api/posts/search/findByTitle")
+                        .param("title", "Learning Html"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
+
+    @Test
     public void testViewPostsLikeTitle() throws Exception {
 
         mockMvc.perform(get("/api/posts/search/findByTitleLike")
