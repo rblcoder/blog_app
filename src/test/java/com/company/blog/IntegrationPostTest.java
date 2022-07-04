@@ -52,4 +52,14 @@ public class IntegrationPostTest {
                 .andDo(print());
 
     }
+
+    @Test
+    public void testViewPostsLikeTitle() throws Exception {
+
+        mockMvc.perform(get("/api/posts/search/findByTitleLike")
+                        .param("title", "%Learning%"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
 }

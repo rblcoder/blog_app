@@ -17,4 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllPostsByOnlineUserName(@Param("name") String name);
 
     List<Post> findByTitle(String title);
+
+    List<Post> findByTitleLike(String title);
 }
