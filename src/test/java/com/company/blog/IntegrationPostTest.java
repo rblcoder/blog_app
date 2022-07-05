@@ -75,7 +75,7 @@ public class IntegrationPostTest {
     }
 
     @Test
-    public void testViewPostsLikeTitle() throws Exception {
+    public void testViewPostsTitleLike() throws Exception {
 
         mockMvc.perform(get("/api/posts/search/findByTitleLike")
                         .param("title", "%Learning%"))
