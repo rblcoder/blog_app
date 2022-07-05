@@ -44,6 +44,16 @@ public class IntegrationPostTest {
     }
 
     @Test
+    public void testViewPostsSortByTitle() throws Exception {
+
+        mockMvc.perform(get("/api/posts")
+                        .param("sort", "title,desc"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
+
+    @Test
     public void testViewPostsByAuthorName() throws Exception {
 
         mockMvc.perform(get("/api/posts/search/findAllPostsByOnlineUserName")
