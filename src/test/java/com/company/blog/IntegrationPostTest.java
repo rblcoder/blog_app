@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -78,6 +79,16 @@ public class IntegrationPostTest {
 
         mockMvc.perform(get("/api/posts/search/findByTitleLike")
                         .param("title", "%Learning%"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+
+    }
+
+    @Test
+    public void testViewPostsTitleContains() throws Exception {
+
+        mockMvc.perform(get("/api/posts/search/findByTitleContains")
+                        .param("title", "Html"))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(print());
 
