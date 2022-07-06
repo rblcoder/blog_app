@@ -67,6 +67,7 @@ public class IntegrationOnlineUserTest {
     void testfindUsersWithPostTitleLike() throws Exception {
         mockMvc.perform(get("/api/users/search/findUsersWithPostTitleLike")
                         .param("title", "%Java%"))
-                .andExpect(status().is2xxSuccessful());
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
     }
 }
