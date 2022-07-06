@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @RepositoryRestResource
@@ -39,4 +40,19 @@ public class Post {
     @JsonProperty("author")
     private OnlineUser onlineUser;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id)
+                && title.equals(post.title)
+                && text.equals(post.text) && tags.equals(post.tags)
+                && onlineUser.equals(post.onlineUser);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, text, tags, onlineUser);
+    }
 }

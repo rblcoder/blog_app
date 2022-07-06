@@ -9,7 +9,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RepositoryRestResource
 @Entity
@@ -41,4 +43,27 @@ public class OnlineUser {
     @NotEmpty(message = "Password name must not be empty")
     @NonNull
     private String password;
+
+    public void addPost(Post post){
+        if (posts == null){
+            posts = new ArrayList<>();
+        }
+        posts.add(post);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OnlineUser that = (OnlineUser) o;
+        return Objects.equals(id, that.id)
+                && Objects.equals(location, that.location)
+                && name.equals(that.name) && emailId.equals(that.emailId)
+                && password.equals(that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(posts, id, location, name, emailId, password);
+    }
 }

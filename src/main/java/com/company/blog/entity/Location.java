@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import java.util.Objects;
 
 
 @Getter
@@ -20,4 +21,19 @@ public class Location {
     private String state;
 
     private String country;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Objects.equals(city, location.city)
+                && Objects.equals(state, location.state)
+                && Objects.equals(country, location.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(city, state, country);
+    }
 }
