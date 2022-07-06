@@ -10,11 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -68,6 +69,22 @@ public class IntegrationOnlineUserTest {
         mockMvc.perform(get("/api/users/search/findUsersWithPostTitleLike")
                         .param("title", "%Java%"))
                 .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+    }
+
+    @Test
+    void testGetPostsForAUserWithIdOne() throws Exception {
+        mockMvc.perform(get("/api/users/1/posts"))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+    }
+
+    @Test
+    void testGetPostWithIdOneForAUserWithIdOne() throws Exception {
+        mockMvc.perform(get("/api/users/1/posts/1"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.title")
+                        .value("Learning Html"))
                 .andDo(print());
     }
 }
