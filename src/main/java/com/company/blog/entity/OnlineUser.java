@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @RepositoryRestResource
 @Entity
@@ -36,6 +37,10 @@ public class OnlineUser {
     @NonNull
     @Email
     private String emailId;
+
+
+    @OneToMany(mappedBy = "onlineUser")
+    List<Post> posts;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 6, max = 16)

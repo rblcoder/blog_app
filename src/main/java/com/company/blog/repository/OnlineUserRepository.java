@@ -10,4 +10,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface OnlineUserRepository extends JpaRepository<OnlineUser, Long> {
     List<OnlineUser> findByLocationCountry(String country);
+
+    @Query("from OnlineUser u left join u.posts p where p.title like :title")
+    List<OnlineUser> findUsersWithPostTitleLike(String title);
 }

@@ -62,4 +62,11 @@ public class IntegrationOnlineUserTest {
                                 " \"password\": \"password\"}"))
                 .andExpect(status().is2xxSuccessful());
     }
+
+    @Test
+    void testfindUsersWithPostTitleLike() throws Exception {
+        mockMvc.perform(get("/api/users/search/findUsersWithPostTitleLike")
+                .param("title", "%Java%"))
+                .andExpect(status().is2xxSuccessful());
+    }
 }
