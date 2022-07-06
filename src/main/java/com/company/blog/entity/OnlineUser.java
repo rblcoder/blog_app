@@ -22,7 +22,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Table(name = "online_user")
 public class OnlineUser {
-    @OneToMany(mappedBy = "onlineUser")
+    @OneToMany(mappedBy = "onlineUser", fetch = FetchType.LAZY)
     List<Post> posts;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
