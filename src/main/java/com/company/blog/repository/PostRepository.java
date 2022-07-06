@@ -1,6 +1,5 @@
 package com.company.blog.repository;
 
-import com.company.blog.entity.OnlineUser;
 import com.company.blog.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

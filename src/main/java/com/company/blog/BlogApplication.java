@@ -1,7 +1,7 @@
 package com.company.blog;
 
-import com.company.blog.entity.OnlineUser;
 import com.company.blog.entity.Location;
+import com.company.blog.entity.OnlineUser;
 import com.company.blog.entity.Post;
 import com.company.blog.entity.Tag;
 import com.company.blog.repository.OnlineUserRepository;

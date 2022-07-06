@@ -20,28 +20,22 @@ import java.util.List;
 @RequiredArgsConstructor
 @Table(name = "online_user")
 public class OnlineUser {
+    @OneToMany(mappedBy = "onlineUser")
+    List<Post> posts;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @Embedded
     private Location location;
-
     @NotEmpty(message = "User name must not be empty")
     @Pattern(regexp = "^[A-Za-z0-9]+$")
     @Size(min = 4, max = 15)
     @NonNull
     private String name;
-
     @NonNull
     @Email
     private String emailId;
-
-
-    @OneToMany(mappedBy = "onlineUser")
-    List<Post> posts;
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Size(min = 6, max = 16)
     @NotEmpty(message = "Password name must not be empty")
