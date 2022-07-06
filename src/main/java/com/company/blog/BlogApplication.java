@@ -56,6 +56,7 @@ public class BlogApplication {
         HashSet<Tag> frontEndTags = new HashSet<>();
         frontEndTags.add(htmlTag);
         postRepository.save(new Post("Learning Html", "Found courses on FreecodeCamp", frontEndTags, onlineUserJack));
+        postRepository.save(new Post("Learning CSS", "Found courses on FreecodeCamp", frontEndTags, onlineUserJack));
         postRepository.save(new Post("Learning Java", "Attended Bootcamp", javaRelatedTags, onlineUserPramita));
 
 
