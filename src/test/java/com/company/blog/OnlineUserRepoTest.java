@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @DataJpaTest
 public class OnlineUserRepoTest {
@@ -46,5 +43,18 @@ public class OnlineUserRepoTest {
         Assertions.assertEquals(onlineUserJack,userResult);
 
         Assertions.assertEquals(2, userResult.getPosts().size());
+    }
+
+    @Test
+    void testfindUserByIdThenUpdate() {
+        Location location = new Location("Bengaluru", "Karnataka", "India");
+        OnlineUser onlineUserJack = new OnlineUser("Jack", "jack@rmail.com", "jack123");
+        onlineUserJack.setLocation(location);
+        onlineUserJack.setId(1L);
+
+        OnlineUser userResult = onlineUserRepository.findById(1L).orElse(null);
+        userResult.setName("Prasad");
+        Assertions.assertTrue(Objects.equals("Prasad", onlineUserRepository.save(userResult).getName()));
+
     }
 }
