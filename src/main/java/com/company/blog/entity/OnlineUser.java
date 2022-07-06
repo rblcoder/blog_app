@@ -44,8 +44,8 @@ public class OnlineUser {
     @NonNull
     private String password;
 
-    public void addPost(Post post){
-        if (posts == null){
+    public void addPost(Post post) {
+        if (posts == null) {
             posts = new ArrayList<>();
         }
         posts.add(post);
