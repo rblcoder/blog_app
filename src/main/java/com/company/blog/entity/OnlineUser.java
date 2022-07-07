@@ -22,7 +22,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Table(name = "online_user")
 public class OnlineUser {
-    @OneToMany(mappedBy = "onlineUser", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "onlineUser", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     List<Post> posts;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
