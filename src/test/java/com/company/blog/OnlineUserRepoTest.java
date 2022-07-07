@@ -18,15 +18,15 @@ public class OnlineUserRepoTest {
 
     @Test
     void testfindByLocationCountry() {
-        onlineUserRepository
-                .findByLocationCountry("India").get(0).getName().equals("Jack");
+        Assertions.assertEquals("Jack", onlineUserRepository
+                .findByLocationCountry("India").get(0).getName());
     }
 
     @Test
     void testfindUsersWithPostTitleLike() {
-        onlineUserRepository
+        Assertions.assertEquals("Pramita", onlineUserRepository
                 .findUsersWithPostTitleLike("%Java%")
-                .get(0).getName().equals("Pramita");
+                .get(0).getName());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class OnlineUserRepoTest {
         OnlineUser userResult = onlineUserRepository.findById(1L).orElse(null);
         Assertions.assertEquals(onlineUserJack, userResult);
 
-        Assertions.assertEquals(2, userResult.getPosts().size());
+        Assertions.assertEquals(2, Objects.requireNonNull(userResult).getPosts().size());
     }
 
     @Test
@@ -51,7 +51,9 @@ public class OnlineUserRepoTest {
 
         OnlineUser userResult = onlineUserRepository.findById(1L).orElse(null);
         userResult.setName("Prasad");
-        Assertions.assertTrue(Objects.equals("Prasad", onlineUserRepository.save(userResult).getName()));
+        Assertions.assertEquals("Prasad",
+                onlineUserRepository.save(userResult).getName());
 
     }
+
 }
