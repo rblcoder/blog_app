@@ -27,7 +27,7 @@ public class Post {
     @NonNull
     private String text;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "post_tags", joinColumns = {@JoinColumn(name = "post_id",
             referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id",
@@ -41,6 +41,10 @@ public class Post {
     @NonNull
     @JsonProperty("author")
     private OnlineUser onlineUser;
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "header_image_id")
+    private HeaderImage headerImage;
 
     @Override
     public boolean equals(Object o) {
