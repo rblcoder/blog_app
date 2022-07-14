@@ -51,7 +51,7 @@ public class OnlineUserRepoTest {
         onlineUserJack.setId(1L);
 
         OnlineUser userResult = onlineUserRepository.findById(1L).orElse(null);
-        userResult.setName("Prasad");
+        Objects.requireNonNull(userResult).setName("Prasad");
         Assertions.assertEquals("Prasad",
                 onlineUserRepository.save(userResult).getName());
 
