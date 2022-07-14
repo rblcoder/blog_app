@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import javax.validation.ConstraintViolationException;
 import java.util.Objects;
 
 @DataJpaTest
@@ -53,6 +54,17 @@ public class OnlineUserRepoTest {
         userResult.setName("Prasad");
         Assertions.assertEquals("Prasad",
                 onlineUserRepository.save(userResult).getName());
+
+    }
+
+    @Test
+    void testSaveUserExceptionWhenPasswordLengthLessThan6() {
+        Location location = new Location("Bengaluru", "Karnataka", "India");
+        OnlineUser onlineUserJack = new OnlineUser("Jack", "jack@rmail.com", "j");
+        onlineUserJack.setLocation(location);
+
+        Assertions.assertThrows(ConstraintViolationException.class,
+                ()-> onlineUserRepository.save(onlineUserJack));
 
     }
 
